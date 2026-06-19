@@ -1,0 +1,11 @@
+{
+  "name": "@m-motors/types",
+  "version": "1.0.0",
+  "description": "Types TypeScript partagés",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "ISC"
+}

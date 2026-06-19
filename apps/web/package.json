@@ -1,0 +1,8 @@
+{
+  "name": "@m-motors/web",
+  "version": "1.0.0",
+  "description": "Application web pour la plateforme M-Motors",
+  "private": true,
+  "license": "ISC",
+  "type": "module"
+}

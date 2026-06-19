@@ -1,0 +1,8 @@
+{
+  "name": "@m-motors/api",
+  "version": "1.0.0",
+  "description": "API pour la plateforme M-Motors",
+  "private": true,
+  "license": "ISC",
+  "type": "module"
+}

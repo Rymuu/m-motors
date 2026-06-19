@@ -1,0 +1,21 @@
+{
+  "name": "m-motors",
+  "version": "1.0.0",
+  "description": "Plateforme de vente et location de véhicules d'occasion",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel run dev",
+    "build": "pnpm --parallel run build"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+"devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.5.1",
+      "onFail": "download"
+    }
+  }
+}
