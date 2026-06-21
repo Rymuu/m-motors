@@ -34,7 +34,7 @@ export async function getVehiclesController(req: Request, res: Response) {
 
 export async function getVehicleByIdController(req: Request, res: Response) {
   try {
-    const { id } = req.params
+    const id = req.params.id as string
     const vehicle = await getVehicleById(id)
 
     if (!vehicle) {

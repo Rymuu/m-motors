@@ -1,12 +1,21 @@
 import { fetchVehicles } from '@/lib/api'
 import type { Vehicle } from '@m-motors/types'
+import VehicleFiltersForm from '@/components/VehicleFiltersForm'
 
-export default async function VehiclesPage() {
-  const result = await fetchVehicles()
+type PageProps = {
+  searchParams: Promise<Record<string, string | undefined>>
+}
+
+export default async function VehiclesPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  const result = await fetchVehicles(params as Record<string, string>)
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Nos véhicules</h1>
+
+      <VehicleFiltersForm />
+
       <p className="text-gray-600 mb-4">{result.totalItems} véhicules disponibles</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
