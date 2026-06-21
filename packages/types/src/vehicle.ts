@@ -16,7 +16,8 @@ export type Vehicle = {
   seats: number
   color: string
   price: number
-  minDeposit?: number
+  minDeposit?: number | null
+  maxDeposit?: number | null
   listingType: ListingType
   status: VehicleStatus
   description: string
