@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { prisma } from '../lib/prisma.js'
 
 type RegisterInput = {
@@ -33,4 +34,33 @@ export async function registerUser(data: RegisterInput) {
 
   const { passwordHash: _, ...userWithoutPassword } = user
   return userWithoutPassword
+}
+
+export async function loginUser(email: string, password: string) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  })
+
+  if (!user) {
+    throw new Error('Invalid credentials')
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.passwordHash)
+
+  if (!isPasswordValid) {
+    throw new Error('Invalid credentials')
+  }
+
+  const token = jwt.sign(
+    { userId: user.id, role: user.role, email: user.email },
+    process.env.JWT_SECRET as string,
+    { expiresIn: '7d' }
+  )
+
+  const { passwordHash: _, ...userWithoutPassword } = user
+
+  return {
+    token,
+    user: userWithoutPassword,
+  }
 }
