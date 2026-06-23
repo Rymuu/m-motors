@@ -12,3 +12,14 @@ export async function fetchVehicles(searchParams?: Record<string, string>) {
 
   return res.json()
 }
+
+export async function fetchVehicleById(id: string) {
+  const res = await fetch(`${API_URL}/vehicles/${id}`, {
+    cache: 'no-store',
+  })
+
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error('Failed to fetch vehicle')
+
+  return res.json()
+}
