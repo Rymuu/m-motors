@@ -179,14 +179,27 @@ export default function DashboardPage() {
                 </ul>
               </div>
 
-              <p className="text-[#5B6B82] text-xs mt-4">
-                Dossier déposé le{' '}
-                {new Date(app.createdAt).toLocaleDateString('fr-FR', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </p>
+              {/* Footer carte */}
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#E4E9F2]">
+                <p className="text-[#5B6B82] text-xs">
+                  Dossier déposé le{' '}
+                  {new Date(app.createdAt).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+                {!['approved', 'rejected'].includes(app.status) && (
+                  <Link
+                    href={`/dashboard/dossier/${app.id}`}
+                    className="text-sm font-semibold text-[#2563EB] hover:underline no-underline"
+                  >
+                    {(app.documents?.length ?? 0) >= REQUIRED_DOCS.length
+                      ? 'Voir mes documents'
+                      : 'Compléter mon dossier →'}
+                  </Link>
+                )}
+              </div>
             </div>
           ))}
         </div>

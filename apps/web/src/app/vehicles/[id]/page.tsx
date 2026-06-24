@@ -1,6 +1,7 @@
 import { fetchVehicleById } from '@/lib/api'
 import type { Vehicle } from '@m-motors/types'
 import { notFound } from 'next/navigation'
+import ApplyButton from '@/components/ApplyButton'
 import Link from 'next/link'
 
 const FUEL_LABELS: Record<string, string> = {
@@ -108,12 +109,7 @@ export default async function VehicleDetailPage({ params }: PageProps) {
             {vehicle.description}
           </p>
 
-          <Link
-            href={`/login`}
-            className="w-full inline-flex items-center justify-center bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] px-6 py-3.5 rounded-full transition-colors no-underline"
-          >
-            Déposer mon dossier
-          </Link>
+          <ApplyButton vehicleId={vehicle.id} listingType={vehicle.listingType} />
           <p className="text-[#5B6B82] text-xs text-center mt-3">
             Connexion requise pour déposer un dossier
           </p>
