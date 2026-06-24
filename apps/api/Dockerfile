@@ -34,4 +34,4 @@ COPY --from=builder /app/packages/types/src ./packages/types/src
 WORKDIR /app/apps/api
 EXPOSE 5000
 
-CMD ["node", "dist/index.js"]
+CMD ["sh", "-c", "cd /app/apps/api && node_modules/.bin/prisma migrate deploy && node dist/index.js"]
