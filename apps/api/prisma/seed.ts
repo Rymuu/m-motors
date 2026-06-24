@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -360,7 +361,22 @@ async function main() {
         },
     ],
   })
+  
+  const adminPassword = await bcrypt.hash('admin123', 10)
 
+  await prisma.user.upsert({
+    where: { email: 'admin@m-motors.com' },
+    update: {},
+    create: {
+      firstName: 'Admin',
+      lastName: 'M-Motors',
+      email: 'admin@m-motors.com',
+      passwordHash: adminPassword,
+      role: 'admin',
+    },
+  })
+
+  console.log('Admin user created: admin@m-motors.com / admin123')
   console.log('Seed completed.')
 }
 

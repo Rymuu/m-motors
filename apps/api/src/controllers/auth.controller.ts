@@ -5,7 +5,7 @@ import { registerUser, loginUser } from '../services/auth.service.js'
 const registerSchema = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
   phone: z.string().optional(),
 })
@@ -33,7 +33,7 @@ export async function registerController(req: Request, res: Response) {
 }
 
 const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(1),
 })
 
