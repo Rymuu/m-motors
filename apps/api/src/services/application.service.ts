@@ -53,3 +53,32 @@ export async function getUserApplications(userId: string) {
     orderBy: { createdAt: 'desc' },
   })
 }
+
+export async function getApplicationById(applicationId: string, userId: string, userRole: string) {
+  const application = await prisma.application.findUnique({
+    where: { id: applicationId },
+    include: {
+      vehicle: {
+        select: {
+          brand: true,
+          model: true,
+          year: true,
+          price: true,
+          listingType: true,
+          images: true,
+        },
+      },
+      documents: true,
+    },
+  })
+
+  if (!application) {
+    throw new Error('Application not found')
+  }
+
+  if (application.userId !== userId && userRole !== 'admin') {
+    throw new Error('Unauthorized')
+  }
+
+  return application
+}
