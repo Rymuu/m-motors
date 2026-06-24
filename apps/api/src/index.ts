@@ -5,6 +5,8 @@ import vehicleRoutes from './routes/vehicle.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import applicationRoutes from './routes/application.routes.js'
 import documentRoutes from './routes/document.routes.js'
+import vehicleAdminRoutes from './routes/vehicle.admin.routes.js'
+import applicationAdminRoutes from './routes/application.admin.routes.js'
 
 dotenv.config()
 
@@ -22,6 +24,10 @@ app.use('/vehicles', vehicleRoutes)
 app.use('/auth', authRoutes)
 app.use('/applications', applicationRoutes)
 app.use('/applications/:applicationId/documents', documentRoutes)
+
+// Admin routes
+app.use('/admin/vehicles', vehicleAdminRoutes)
+app.use('/admin/applications', applicationAdminRoutes)
   
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
