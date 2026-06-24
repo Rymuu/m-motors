@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 import { Sora, Manrope } from 'next/font/google'
 import Navbar from '../components/layout/Navbar'
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <Toaster position="top-right" />
       </body>
     </html>
   )

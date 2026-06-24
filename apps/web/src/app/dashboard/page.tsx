@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/dist/client/link'
+import Link from 'next/link'
 
 type Document = {
   id: string
@@ -30,7 +30,7 @@ type Application = {
 
 const STATUS_LABELS: Record<string, string> = {
   submitted: 'Déposé',
-  under_review: 'En cours d\'étude',
+  under_review: "En cours d'étude",
   approved: 'Validé',
   rejected: 'Refusé',
 }
@@ -43,11 +43,13 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 const DOC_LABELS: Record<string, string> = {
-  id_card: 'Pièce d\'identité',
+  id_card: "Pièce d'identité",
   proof_of_address: 'Justificatif de domicile',
   proof_of_income: 'Justificatif de revenus',
   bank_details: 'RIB',
 }
+
+const REQUIRED_DOCS = ['id_card', 'proof_of_address', 'proof_of_income', 'bank_details']
 
 function getToken(): string | null {
   return document.cookie
@@ -84,8 +86,6 @@ export default function DashboardPage() {
       return
     }
 
-    setUser(currentUser)
-
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/applications/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -93,7 +93,10 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error('Erreur lors du chargement')
         return res.json()
       })
-      .then(data => setApplications(data))
+      .then(data => {
+        setUser(currentUser)
+        setApplications(data)
+      })
       .catch(() => setError('Impossible de charger vos dossiers.'))
       .finally(() => setLoading(false))
   }, [router])
@@ -124,12 +127,12 @@ export default function DashboardPage() {
       {applications.length === 0 ? (
         <div className="bg-white rounded-2xl border border-[#E4E9F2] p-12 text-center">
           <p className="text-[#5B6B82] mb-4">Vous n&apos;avez pas encore de dossier en cours.</p>
-            <Link
+          <Link
             href="/vehicles"
             className="inline-flex items-center bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] px-6 py-2.5 rounded-full transition-colors no-underline"
-            >
-                Voir les véhicules
-            </Link>
+          >
+            Voir les véhicules
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col gap-6">
@@ -155,20 +158,25 @@ export default function DashboardPage() {
               {/* Documents */}
               <div className="border-t border-[#E4E9F2] pt-4">
                 <p className="text-[#0B1524] text-sm font-semibold mb-3">
-                  Documents ({app.documents.length})
+                  Documents ({app.documents?.length ?? 0}/{REQUIRED_DOCS.length})
                 </p>
-                {app.documents.length === 0 ? (
-                  <p className="text-[#5B6B82] text-sm">Aucun document déposé.</p>
-                ) : (
-                  <ul className="flex flex-col gap-2">
-                    {app.documents.map(doc => (
-                      <li key={doc.id} className="flex items-center gap-2 text-sm text-[#5B6B82]">
-                        <span className="text-[#16A34A]">✓</span>
-                        {DOC_LABELS[doc.type] ?? doc.type}
+                <ul className="flex flex-col gap-1">
+                  {REQUIRED_DOCS.map(docType => {
+                    const submitted = app.documents?.find(d => d.type === docType)
+                    return (
+                      <li key={docType} className="flex items-center gap-2 text-sm">
+                        {submitted ? (
+                          <span className="text-[#16A34A]">✓</span>
+                        ) : (
+                          <span className="text-[#5B6B82]">✗</span>
+                        )}
+                        <span className={submitted ? 'text-[#0B1524]' : 'text-[#5B6B82]'}>
+                          {DOC_LABELS[docType]}
+                        </span>
                       </li>
-                    ))}
-                  </ul>
-                )}
+                    )
+                  })}
+                </ul>
               </div>
 
               <p className="text-[#5B6B82] text-xs mt-4">
