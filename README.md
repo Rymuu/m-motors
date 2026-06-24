@@ -139,7 +139,7 @@ pnpm dev
 
 L'application est déployée sur un VPS OVH via Docker et Traefik.
 
-- **API** : https://m-motors.api.rymuwu.com
+- **API** : https://api.m-motors.rymuwu.com
 - **Front** : https://m-motors.rymuwu.com
 
 ---
