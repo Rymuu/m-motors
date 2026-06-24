@@ -12,7 +12,10 @@ export async function getVehicles(
   }
 
   if (filters.listingType) where.listingType = filters.listingType
-  if (filters.brand) where.brand = filters.brand
+  if (filters.brand) where.brand = {
+    contains: filters.brand,
+    mode: 'insensitive',
+  }
   if (filters.fuelType) where.fuelType = filters.fuelType
   if (filters.transmission) where.transmission = filters.transmission
   if (filters.color) where.color = filters.color

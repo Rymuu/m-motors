@@ -31,6 +31,11 @@ export async function createApplicationController(req: Request, res: Response) {
     if (error instanceof Error && error.message === 'Vehicle not available') {
       return res.status(409).json({ message: error.message })
     }
+    if (error instanceof Error && error.message === 'Admin cannot create application') {
+      return res
+        .status(403)
+        .json({ message: 'Les administrateurs ne peuvent pas déposer de dossier.' })
+    }
     console.error('Create application error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }

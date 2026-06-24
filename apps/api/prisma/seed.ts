@@ -11,6 +11,12 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
   console.log('Seeding database...')
 
+  // Nettoyer la BDD avant de re-seeder
+  await prisma.applicationDocument.deleteMany()
+  await prisma.application.deleteMany()
+  await prisma.vehicle.deleteMany()
+  await prisma.user.deleteMany()
+
   await prisma.vehicle.createMany({
     data: [
       {
@@ -41,7 +47,7 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Gris',
-        price: 27500,
+        price: 389,
         minDeposit: 3000,
         listingType: 'rental',
         status: 'available',
@@ -64,8 +70,8 @@ async function main() {
         status: 'available',
         description: 'Citadine récente, très faible kilométrage, garantie constructeur.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'BMW',
         model: 'Série 3',
         year: 2020,
@@ -81,8 +87,8 @@ async function main() {
         status: 'available',
         description: 'Berline sportive, finition M Sport, intérieur cuir.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Volkswagen',
         model: 'Golf VIII',
         year: 2022,
@@ -93,14 +99,14 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Blanc',
-        price: 4500,
-        minDeposit: 4500,
+        price: 299,
+        minDeposit: 2500,
         listingType: 'rental',
         status: 'available',
         description: 'Compacte premium, faible consommation, équipement complet.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Tesla',
         model: 'Model 3',
         year: 2023,
@@ -116,8 +122,8 @@ async function main() {
         status: 'available',
         description: 'Autonomie 491km, Autopilot inclus, recharge rapide.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Toyota',
         model: 'Yaris',
         year: 2021,
@@ -130,11 +136,11 @@ async function main() {
         color: 'Gris',
         price: 18900,
         listingType: 'purchase',
-        status: 'reserved',
+        status: 'available',
         description: 'Hybride économique, entretien Toyota, faible consommation.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Audi',
         model: 'A4',
         year: 2020,
@@ -147,11 +153,11 @@ async function main() {
         color: 'Gris',
         price: 29500,
         listingType: 'purchase',
-        status: 'sold',
+        status: 'available',
         description: 'Berline executive, full options, historique entretien complet.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Mercedes',
         model: 'Classe A',
         year: 2022,
@@ -162,14 +168,14 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Bleu',
-        price: 3800,
-        minDeposit: 3800,
+        price: 349,
+        minDeposit: 3000,
         listingType: 'rental',
         status: 'available',
         description: 'Compacte premium, intérieur haut de gamme, garantie incluse.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Ford',
         model: 'Puma',
         year: 2023,
@@ -185,8 +191,8 @@ async function main() {
         status: 'available',
         description: 'SUV compact hybride, très faible kilométrage.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Dacia',
         model: 'Sandero',
         year: 2022,
@@ -202,8 +208,8 @@ async function main() {
         status: 'available',
         description: 'Citadine économique, idéale premier véhicule.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Nissan',
         model: 'Qashqai',
         year: 2021,
@@ -214,14 +220,14 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Noir',
-        price: 4200,
-        minDeposit: 4200,
+        price: 319,
+        minDeposit: 2000,
         listingType: 'rental',
         status: 'available',
         description: 'SUV familial spacieux, faible consommation.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Hyundai',
         model: 'Tucson',
         year: 2023,
@@ -237,8 +243,8 @@ async function main() {
         status: 'available',
         description: 'SUV hybride rechargeable, équipement complet, garantie 5 ans.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Fiat',
         model: '500',
         year: 2022,
@@ -254,8 +260,8 @@ async function main() {
         status: 'available',
         description: 'Citadine électrique, parfaite pour la ville, recharge rapide.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Mini',
         model: 'Cooper',
         year: 2021,
@@ -268,11 +274,11 @@ async function main() {
         color: 'Rouge',
         price: 21900,
         listingType: 'purchase',
-        status: 'maintenance',
+        status: 'available',
         description: 'Citadine premium, look sportif, intérieur soigné.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Skoda',
         model: 'Octavia',
         year: 2022,
@@ -288,8 +294,8 @@ async function main() {
         status: 'available',
         description: 'Break familial, grand coffre, très bon rapport qualité-prix.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Volvo',
         model: 'XC40',
         year: 2023,
@@ -300,14 +306,14 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Noir',
-        price: 5200,
-        minDeposit: 5200,
+        price: 549,
+        minDeposit: 4000,
         listingType: 'rental',
         status: 'available',
         description: 'SUV électrique premium, autonomie 425km, sécurité maximale.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Seat',
         model: 'Leon',
         year: 2021,
@@ -323,8 +329,8 @@ async function main() {
         status: 'available',
         description: 'Compacte dynamique, faible consommation, bon état général.',
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Opel',
         model: 'Corsa',
         year: 2022,
@@ -335,14 +341,14 @@ async function main() {
         doors: 5,
         seats: 5,
         color: 'Gris',
-        price: 3200,
-        minDeposit: 3200,
+        price: 249,
+        minDeposit: 1500,
         listingType: 'rental',
         status: 'available',
-        description: 'Citadine électrique, idéale trajets urbains, faible coût d\'usage.',
+        description: "Citadine électrique, idéale trajets urbains, faible coût d'usage.",
         images: [],
-        },
-        {
+      },
+      {
         brand: 'Kia',
         model: 'Sportage',
         year: 2023,
@@ -358,11 +364,12 @@ async function main() {
         status: 'available',
         description: 'SUV hybride récent, garantie 7 ans, équipement haut de gamme.',
         images: [],
-        },
+      },
     ],
   })
-  
+
   const adminPassword = await bcrypt.hash('admin123', 10)
+  const userPassword = await bcrypt.hash('user1234', 10)
 
   await prisma.user.upsert({
     where: { email: 'admin@m-motors.com' },
@@ -376,7 +383,20 @@ async function main() {
     },
   })
 
-  console.log('Admin user created: admin@m-motors.com / admin123')
+  await prisma.user.upsert({
+    where: { email: 'user@test.com' },
+    update: {},
+    create: {
+      firstName: 'Ryme',
+      lastName: 'Lehna',
+      email: 'user@test.com',
+      passwordHash: userPassword,
+      role: 'client',
+    },
+  })
+
+  console.log('Admin: admin@m-motors.com / admin123')
+  console.log('Client: user@test.com / user1234')
   console.log('Seed completed.')
 }
 

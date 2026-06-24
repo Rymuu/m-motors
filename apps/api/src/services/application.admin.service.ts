@@ -46,10 +46,29 @@ export async function updateApplicationStatus(
 ) {
   const application = await prisma.application.findUnique({
     where: { id: applicationId },
+    include: { documents: true },
   })
 
   if (!application) {
     throw new Error('Application not found')
+  }
+
+  if (status === 'approved' && application.documents.length < 4) {
+    throw new Error('Incomplete documents')
+  }
+
+  if (status === 'approved') {
+    await prisma.vehicle.update({
+      where: { id: application.vehicleId },
+      data: {
+        status: application.type === 'purchase' ? 'sold' : 'rented',
+      },
+    })
+  } else if (status === 'rejected') {
+    await prisma.vehicle.update({
+      where: { id: application.vehicleId },
+      data: { status: 'available' },
+    })
   }
 
   return prisma.application.update({
