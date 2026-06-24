@@ -34,4 +34,4 @@ COPY --from=builder /app/packages/types/src ./packages/types/src
 WORKDIR /app/apps/api
 EXPOSE 5000
 
-CMD ["sh", "-c", "cd /app/apps/api && node_modules/.bin/prisma migrate deploy && node dist/index.js"]
+CMD ["sh", "-c", "DATABASE_URL=$DATABASE_URL node_modules/.bin/prisma migrate deploy --schema=prisma/schema.prisma && node dist/index.js"]
