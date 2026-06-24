@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import { z } from 'zod'
-import { createApplication, getUserApplications } from '../services/application.service.js'
+import { createApplication, getApplicationById, getUserApplications } from '../services/application.service.js'
 
 const applicationSchema = z.object({
   vehicleId: z.string().uuid(),
@@ -42,6 +42,27 @@ export async function getUserApplicationsController(req: Request, res: Response)
     res.json(applications)
   } catch (error) {
     console.error('Get applications error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
+export async function getApplicationByIdController(req: Request, res: Response) {
+  try {
+    const applicationId = req.params.applicationId as string
+    const application = await getApplicationById(
+      applicationId,
+      req.user!.userId,
+      req.user!.role
+    )
+    res.json(application)
+  } catch (error) {
+    if (error instanceof Error && error.message === 'Application not found') {
+      return res.status(404).json({ message: error.message })
+    }
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      return res.status(403).json({ message: error.message })
+    }
+    console.error('Get application by ID error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }
 }
