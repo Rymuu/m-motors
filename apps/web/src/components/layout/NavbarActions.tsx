@@ -47,9 +47,6 @@ export default function NavbarActions() {
             Back-office
           </Link>
         )}
-        <Link href="/dashboard" className={navLinkClass(pathname.startsWith('/dashboard'))}>
-          Mon espace
-        </Link>
         <button
           onClick={handleLogout}
           className="text-[15px] font-semibold text-[#5B6B82] hover:text-[#DC2626] transition-colors cursor-pointer bg-transparent border-none"
