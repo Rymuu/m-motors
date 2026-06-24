@@ -49,6 +49,7 @@ export async function getUserApplications(userId: string) {
           images: true,
         },
       },
+      documents: true,
     },
     orderBy: { createdAt: 'desc' },
   })
