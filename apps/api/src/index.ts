@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import vehicleRoutes from './routes/vehicle.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import applicationRoutes from './routes/application.routes.js'
+import documentRoutes from './routes/document.routes.js'
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.get('/health', (req, res) => {
 app.use('/vehicles', vehicleRoutes)
 app.use('/auth', authRoutes)
 app.use('/applications', applicationRoutes)
+app.use('/applications/:applicationId/documents', documentRoutes)
   
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
