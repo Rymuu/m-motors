@@ -7,6 +7,19 @@ type CreateApplicationInput = {
 }
 
 export async function createApplication(data: CreateApplicationInput) {
+  // Vérifier que l'utilisateur n'est pas admin
+  const user = await prisma.user.findUnique({
+    where: { id: data.userId },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  if (user.role === 'admin') {
+    throw new Error('Admin cannot create application')
+  }
+
   const vehicle = await prisma.vehicle.findUnique({
     where: { id: data.vehicleId },
   })

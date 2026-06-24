@@ -26,9 +26,16 @@ export async function updateApplicationStatusController(req: Request, res: Respo
     const application = await updateApplicationStatus(applicationId, status)
     res.json(application)
   } catch (error) {
+    if (error instanceof Error && error.message === 'Incomplete documents') {
+      return res
+        .status(400)
+        .json({ message: 'Le dossier est incomplet — 4 documents requis avant validation.' })
+    }
+
     if (error instanceof Error && error.message === 'Application not found') {
       return res.status(404).json({ message: error.message })
     }
+
     console.error('Update application status error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }

@@ -149,7 +149,10 @@ export default function AdminPage() {
         }
       )
 
-      if (!res.ok) throw new Error()
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.message)
+      }
 
       setApplications(prev =>
         prev.map(app =>
@@ -164,8 +167,8 @@ export default function AdminPage() {
       } else {
         toast.success("Dossier passé en cours d'étude.", { id: toastId })
       }
-    } catch {
-      toast.error('Erreur lors de la mise à jour.', { id: toastId })
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Erreur lors de la mise à jour.', { id: toastId })
     } finally {
       setUpdating(null)
     }
