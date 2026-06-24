@@ -14,7 +14,6 @@ COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PUBLIC_API_URL=https://api.m-motors.rymuwu.com
-RUN pnpm --filter @m-motors/types build
 RUN pnpm --filter web build
 
 FROM node:22-alpine AS runner
