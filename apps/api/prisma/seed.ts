@@ -11,7 +11,6 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
   console.log('Seeding database...')
 
-  // Nettoyer la BDD avant de re-seeder
   await prisma.applicationDocument.deleteMany()
   await prisma.application.deleteMany()
   await prisma.vehicle.deleteMany()
@@ -34,7 +33,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Citadine compacte, faible kilométrage, premier propriétaire.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=80'],
       },
       {
         brand: 'Peugeot',
@@ -52,7 +51,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: 'SUV familial, boîte automatique, entretien à jour.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80'],
       },
       {
         brand: 'Citroën',
@@ -69,7 +68,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Citadine récente, très faible kilométrage, garantie constructeur.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80'],
       },
       {
         brand: 'BMW',
@@ -86,7 +85,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Berline sportive, finition M Sport, intérieur cuir.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80'],
       },
       {
         brand: 'Volkswagen',
@@ -104,7 +103,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: 'Compacte premium, faible consommation, équipement complet.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80'],
       },
       {
         brand: 'Tesla',
@@ -121,7 +120,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Autonomie 491km, Autopilot inclus, recharge rapide.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80'],
       },
       {
         brand: 'Toyota',
@@ -138,7 +137,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Hybride économique, entretien Toyota, faible consommation.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=80'],
       },
       {
         brand: 'Audi',
@@ -155,7 +154,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Berline executive, full options, historique entretien complet.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80'],
       },
       {
         brand: 'Mercedes',
@@ -173,7 +172,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: 'Compacte premium, intérieur haut de gamme, garantie incluse.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80'],
       },
       {
         brand: 'Ford',
@@ -190,7 +189,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'SUV compact hybride, très faible kilométrage.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80'],
       },
       {
         brand: 'Dacia',
@@ -207,7 +206,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Citadine économique, idéale premier véhicule.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80'],
       },
       {
         brand: 'Nissan',
@@ -225,7 +224,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: 'SUV familial spacieux, faible consommation.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&q=80'],
       },
       {
         brand: 'Hyundai',
@@ -242,7 +241,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'SUV hybride rechargeable, équipement complet, garantie 5 ans.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&q=80'],
       },
       {
         brand: 'Fiat',
@@ -259,7 +258,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Citadine électrique, parfaite pour la ville, recharge rapide.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80'],
       },
       {
         brand: 'Mini',
@@ -276,7 +275,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Citadine premium, look sportif, intérieur soigné.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800&q=80'],
       },
       {
         brand: 'Skoda',
@@ -293,7 +292,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Break familial, grand coffre, très bon rapport qualité-prix.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&q=80'],
       },
       {
         brand: 'Volvo',
@@ -311,7 +310,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: 'SUV électrique premium, autonomie 425km, sécurité maximale.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800&q=80'],
       },
       {
         brand: 'Seat',
@@ -328,7 +327,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'Compacte dynamique, faible consommation, bon état général.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800&q=80'],
       },
       {
         brand: 'Opel',
@@ -346,7 +345,7 @@ async function main() {
         listingType: 'rental',
         status: 'available',
         description: "Citadine électrique, idéale trajets urbains, faible coût d'usage.",
-        images: [],
+        images: ['https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80'],
       },
       {
         brand: 'Kia',
@@ -363,7 +362,7 @@ async function main() {
         listingType: 'purchase',
         status: 'available',
         description: 'SUV hybride récent, garantie 7 ans, équipement haut de gamme.',
-        images: [],
+        images: ['https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80'],
       },
     ],
   })
@@ -384,19 +383,19 @@ async function main() {
   })
 
   await prisma.user.upsert({
-    where: { email: 'user@test.com' },
+    where: { email: 'client@m-motors.com' },
     update: {},
     create: {
-      firstName: 'Ryme',
-      lastName: 'Lehna',
-      email: 'user@test.com',
+      firstName: 'Sophie',
+      lastName: 'Martin',
+      email: 'client@m-motors.com',
       passwordHash: userPassword,
       role: 'client',
     },
   })
 
   console.log('Admin: admin@m-motors.com / admin123')
-  console.log('Client: user@test.com / user1234')
+  console.log('Client: client@m-motors.com / user1234')
   console.log('Seed completed.')
 }
 
