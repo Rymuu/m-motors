@@ -22,6 +22,9 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "M-Motors — Achat & Location de véhicules d'occasion",
   description: "Achetez ou louez un véhicule d'occasion certifié.",
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
