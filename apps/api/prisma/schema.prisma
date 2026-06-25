@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  client
+  admin
+}
+
+model User {
+  id           String        @id @default(uuid())
+  firstName    String
+  lastName     String
+  email        String        @unique
+  passwordHash String
+  phone        String?
+  role         UserRole      @default(client)
+  applications Application[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum FuelType {
+  petrol
+  diesel
+  electric
+  hybrid
+}
+
+enum TransmissionType {
+  manual
+  automatic
+}
+
+enum ListingType {
+  purchase
+  rental
+}
+
+enum VehicleStatus {
+  available
+  reserved
+  sold
+  rented
+  maintenance
+}
+
+model Vehicle {
+  id           String           @id @default(uuid())
+  brand        String
+  model        String
+  year         Int
+  mileage      Int
+  fuelType     FuelType
+  transmission TransmissionType
+  power        Int
+  doors        Int
+  seats        Int
+  color        String
+  price        Float
+  minDeposit   Float?
+  listingType  ListingType
+  status       VehicleStatus    @default(available)
+  description  String
+  images       String[]
+  applications Application[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+enum ApplicationStatus {
+  submitted
+  under_review
+  approved
+  rejected
+}
+
+enum ApplicationType {
+  purchase
+  rental
+}
+
+model Application {
+  id        String                 @id @default(uuid())
+  userId    String
+  user      User                   @relation(fields: [userId], references: [id])
+  vehicleId String
+  vehicle   Vehicle                @relation(fields: [vehicleId], references: [id])
+  type      ApplicationType
+  status    ApplicationStatus      @default(submitted)
+  documents ApplicationDocument[]
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+}
+
+enum DocumentType {
+  id_card
+  proof_of_address
+  proof_of_income
+  bank_details
+}
+
+model ApplicationDocument {
+  id            String       @id @default(uuid())
+  applicationId String
+  application   Application  @relation(fields: [applicationId], references: [id])
+  type          DocumentType
+  fileUrl       String
+  uploadedAt    DateTime     @default(now())
+}
